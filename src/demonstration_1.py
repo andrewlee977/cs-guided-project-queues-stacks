@@ -24,7 +24,7 @@ class Stack:
         """Remove and return the last item"""
         # If the stack is empty, return None
         # (it would also be reasonable to throw an exception)
-        if not self.items:
+        if not self.items: # if no items
             return None
 
         return self.items.pop()
@@ -38,19 +38,31 @@ class Stack:
 class MaxStack:
     def __init__(self):
         # Your code here
+        self.stack = Stack()
+        self.maxing_stack = Stack()
 
 
     def push(self, item):
         """Add a new item onto the top of our stack."""
         # Your code here
+        self.stack.push(item)
+        if self.maxing_stack.peek() is None or item >= self.maxing_stack.peek():
+            self.maxing_stack.push(item)
 
 
     def pop(self):
         """Remove and return the top item from our stack."""
-        # Your code here
-
+        # pop the top of the stack on to an item variable
+        item = self.stack.pop()
+        # check if the item is equal to the item at the top of the maxing stack
+            # pop the top of the maxing stack
+        if item == self.maxing_stack.peek():
+        # return the item to the caller
+            self.maxing_stack.pop()
+        return item
 
     def get_max(self):
         """The last item in maxes_stack is the max item in our stack."""
         # Your code here
+        return self.maxing_stack.peek()
 
